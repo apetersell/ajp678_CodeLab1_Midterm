@@ -47,6 +47,8 @@ public class RPSSystem : MonoBehaviour {
 		rpsShiftController ();
 		createBlock ();
 
+		hb.handNumber = handNumber;
+
 		
 	}
 
@@ -84,7 +86,8 @@ public class RPSSystem : MonoBehaviour {
 		{
 			sr.color = rockColor;
 			hbsr.color = rockColor;
-			hbsr.sprite = hb.rockSprite;  
+			hbsr.sprite = hb.rockSprite; 
+
 		}
 		if (paper) 
 		{
