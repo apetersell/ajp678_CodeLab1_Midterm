@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RPSSystem : MonoBehaviour {
 
+	public int playerNum;
 	public int handNumber;
 	public bool rock;
 	public Color rockColor;
@@ -23,7 +24,8 @@ public class RPSSystem : MonoBehaviour {
 	public bool canShift = true;
 	public bool destroyMode;
 
-
+	GameObject scoreManager;
+	ScoreManager sm;
 	Hitbox hb;
 	SpriteRenderer sr;
 	SpriteRenderer hbsr; 
@@ -35,6 +37,8 @@ public class RPSSystem : MonoBehaviour {
 		hbsr = hitbox.GetComponent<SpriteRenderer> (); 
 		sr = GetComponent<SpriteRenderer> ();
 		handNumber = Random.Range (1, 3);
+		scoreManager = GameObject.Find("Score Manager");
+		sm = scoreManager.GetComponent<ScoreManager> ();
 
 		
 	}
@@ -147,6 +151,8 @@ public class RPSSystem : MonoBehaviour {
 			{
 				Instantiate (scissorsBlock, hb.transform.position, Quaternion.identity);
 			}
+			sm.scorePoints (playerNum);
 		}
+
 	}
 }

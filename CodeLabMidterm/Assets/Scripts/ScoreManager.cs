@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour {
 
-	public static int galScore; 
+	public static int galScore;
 	public static int guyScore; 
 	public static ScoreManager scoreCard; 
 	public KeyCode restart;
@@ -51,8 +51,7 @@ public class ScoreManager : MonoBehaviour {
 		{
 			if (Input.GetKeyDown (restart)) 
 			{
-				Debug.Log ("Hit reset.");
-				SceneManager.LoadScene ("Week 5 Game");
+				SceneManager.LoadScene ("Midterm Game");
 			}
 		}
 	}
@@ -67,6 +66,19 @@ public class ScoreManager : MonoBehaviour {
 		if (sentValue == 2) 
 		{
 			guyScore++;
+		}
+	}
+
+	public void subtractPoints (int sentValue)
+	{
+		if (sentValue == 1) 
+		{
+			galScore --;
+		}
+
+		if (sentValue == 2) 
+		{
+			guyScore--;
 		}
 	}
 }

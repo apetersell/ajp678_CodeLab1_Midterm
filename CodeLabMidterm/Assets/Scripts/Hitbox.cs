@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Hitbox : MonoBehaviour {
 
+	public int otherPlayerNum; 
 	public Vector3 flippedPos;
 	public Vector3 nonFlippedPos;
 	PlayerMovement pm;
@@ -15,12 +16,16 @@ public class Hitbox : MonoBehaviour {
 	public Sprite scissorsSprite;
 	public int handNumber;
 	BlockShtuffs bs; 
+	GameObject scoreManager;
+	ScoreManager sm;
 
 
 	// Use this for initialization
 	void Start () {
 
 		pm = GetComponentInParent<PlayerMovement> ();
+		scoreManager = GameObject.Find("Score Manager");
+		sm = scoreManager.GetComponent<ScoreManager> ();
 
 	}
 	
@@ -81,21 +86,29 @@ public class Hitbox : MonoBehaviour {
 			if (bs.rock == true && paper == true) 
 			{
 				Destroy (coll.gameObject);
+				if (bs.ownerNum == otherPlayerNum) 
+				{
+					sm.subtractPoints (otherPlayerNum);
+				}
 			}
 
 			if (bs.paper == true && scissors == true) 
 			{
 				Destroy (coll.gameObject);
+				if (bs.ownerNum == otherPlayerNum) 
+				{
+					sm.subtractPoints (otherPlayerNum);
+				}
 			}
 
 			if (bs.scissors == true && rock == true) 
 			{
 				Destroy (coll.gameObject);
+				if (bs.ownerNum == otherPlayerNum) 
+				{
+					sm.subtractPoints (otherPlayerNum);
+				}
 			}
-
 		}
-
-
 	}
-		
 }
