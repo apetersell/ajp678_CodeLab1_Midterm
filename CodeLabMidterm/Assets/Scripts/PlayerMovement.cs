@@ -26,6 +26,8 @@ public class PlayerMovement : MonoBehaviour {
 	public KeyCode jump;
 	public GameObject hitbox;
 
+	GameObject tokenSpawner;
+	TokenSpawner ts;
 	SpriteRenderer sr; 
 	Rigidbody2D rb; 
 	Hitbox hb;
@@ -39,6 +41,8 @@ public class PlayerMovement : MonoBehaviour {
 		rb = GetComponent<Rigidbody2D> ();
 		grounded = true; 
 		hb = hitbox.GetComponent<Hitbox> ();
+		tokenSpawner = GameObject.Find ("TokenSpawner"); 
+		ts = tokenSpawner.GetComponent<TokenSpawner> ();
 		
 	}
 	
@@ -147,18 +151,21 @@ public class PlayerMovement : MonoBehaviour {
 		if (touched.gameObject.tag == "Paper Token")   
 		{
 			hb.makePaper ();
+			ts.paperGone = true;
 			Destroy (touched.gameObject); 
 		}
 
 		if (touched.gameObject.tag == "Rock Token") 
 		{
 			hb.makeRock ();
+			ts.rockGone = true;
 			Destroy (touched.gameObject); 
 		}
 
 		if (touched.gameObject.tag == "Scissors Token") 
 		{
 			hb.makeScissors ();
+			ts.scissorsGone = true;
 			Destroy (touched.gameObject); 
 		}
 
