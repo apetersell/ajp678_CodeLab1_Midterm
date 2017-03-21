@@ -45,6 +45,7 @@ public class RPSSystem : MonoBehaviour {
 		handHandler ();
 		visiuals ();
 		rpsShiftController ();
+		createBlock ();
 
 		
 	}
@@ -123,5 +124,26 @@ public class RPSSystem : MonoBehaviour {
 			shiftCooldown = 0;
 		}
 
+	}
+
+	void createBlock ()
+	{
+		if (Input.GetKeyDown (create)) 
+		{
+			if (rock == true) 
+			{
+				Instantiate (rockBlock, hb.transform.position, Quaternion.identity);
+			}
+
+			if (paper == true) 
+			{
+				Instantiate (paperBlock, hb.transform.position, Quaternion.identity); 
+			}
+
+			if (scissors == true) 
+			{
+				Instantiate (scissorsBlock, hb.transform.position, Quaternion.identity);
+			}
+		}
 	}
 }

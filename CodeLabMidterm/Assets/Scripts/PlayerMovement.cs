@@ -134,7 +134,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D touched)
 	{
-		if (touched.gameObject.tag == "Floor") {
+		if (touched.gameObject.tag == "Floor" || touched.gameObject.tag == "Player" || touched.gameObject.tag == "Block") {
 			grounded = true;
 			inAir = false;
 			canHover = false;
