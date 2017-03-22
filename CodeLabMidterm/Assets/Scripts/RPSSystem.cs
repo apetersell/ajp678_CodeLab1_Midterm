@@ -22,7 +22,9 @@ public class RPSSystem : MonoBehaviour {
 	public int shiftCooldown;
 	public int shiftCooldownLimit;
 	public bool canShift = true;
-	public bool destroyMode;
+	public Stack <string> currentHand = new Stack <string> ();
+	public int maxStackSize;
+	public int currentStackSize;
 
 	GameObject scoreManager;
 	ScoreManager sm;
@@ -50,6 +52,8 @@ public class RPSSystem : MonoBehaviour {
 		visiuals ();
 		rpsShiftController ();
 		createBlock ();
+
+
 
 		hb.handNumber = handNumber;
 
@@ -111,11 +115,26 @@ public class RPSSystem : MonoBehaviour {
 
 	void rpsShiftController ()
 	{
-		if (canShift == true && destroyMode == false) 
+		if (canShift == true) 
 		{
 			if (Input.GetKeyDown (shift)) 
 			{
-				handNumber++;
+				string loadUp = currentHand.Pop (); 
+				if (loadUp == "Rock") 
+				{
+					handNumber = 1;
+					currentStackSize--; 
+				}
+				if (loadUp == "Paper") 
+				{
+					handNumber = 2;
+					currentStackSize--;
+				}
+				if (loadUp == "Scissors") 
+				{
+					handNumber = 3;
+					currentStackSize--;
+				}
 				canShift = false; 
 			}
 		}
@@ -153,6 +172,14 @@ public class RPSSystem : MonoBehaviour {
 			}
 			sm.scorePoints (playerNum);
 		}
+	}
 
+	public void addToStack (string sentString)
+	{
+		if (currentStackSize < maxStackSize) 
+		{
+			currentHand.Push (sentString);
+			currentStackSize++; 
+		}
 	}
 }

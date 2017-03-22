@@ -25,8 +25,9 @@ public class PlayerMovement : MonoBehaviour {
 	public KeyCode right;
 	public KeyCode jump;
 	public GameObject hitbox;
-
-//	GameObject tokenSpawner;
+	RPSSystem rps;
+	TokenSpawner ts;
+	GameObject tokenSpawner;
 	SpriteRenderer sr; 
 	Rigidbody2D rb; 
 
@@ -37,8 +38,10 @@ public class PlayerMovement : MonoBehaviour {
 
 		sr = GetComponent<SpriteRenderer> ();
 		rb = GetComponent<Rigidbody2D> ();
+		rps = GetComponent<RPSSystem> ();
 		grounded = true; 
-//		tokenSpawner = GameObject.Find ("TokenSpawner"); 
+		tokenSpawner = GameObject.Find ("TokenSpawner"); 
+		ts = tokenSpawner.GetComponent<TokenSpawner> (); 
 		
 	}
 	
@@ -142,30 +145,30 @@ public class PlayerMovement : MonoBehaviour {
 		}
 	}
 
-//	void OnTriggerEnter2D (Collider2D touched)
-//	{
-//		if (touched.gameObject.tag == "Paper Token")   
-//		{
-//			hb.makePaper ();
-//			ts.paperGone = true;
-//			Destroy (touched.gameObject); 
-//		}
-//
-//		if (touched.gameObject.tag == "Rock Token") 
-//		{
-//			hb.makeRock ();
-//			ts.rockGone = true;
-//			Destroy (touched.gameObject); 
-//		}
-//
-//		if (touched.gameObject.tag == "Scissors Token") 
-//		{
-//			hb.makeScissors ();
-//			ts.scissorsGone = true;
-//			Destroy (touched.gameObject); 
-//		}
-//
-//	}
+	void OnTriggerEnter2D (Collider2D touched)
+	{
+		if (touched.gameObject.tag == "Paper Token")   
+		{
+			rps.addToStack ("Paper");
+			ts.paperGone = true;
+			Destroy (touched.gameObject); 
+		}
+
+		if (touched.gameObject.tag == "Rock Token") 
+		{
+			rps.addToStack ("Rock");
+			ts.rockGone = true;
+			Destroy (touched.gameObject); 
+		}
+
+		if (touched.gameObject.tag == "Scissors Token") 
+		{
+			rps.addToStack ("Scissors");
+			ts.scissorsGone = true;
+			Destroy (touched.gameObject); 
+		}
+
+	}
 
 
 }
