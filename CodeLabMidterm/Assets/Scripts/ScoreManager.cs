@@ -6,14 +6,19 @@ using UnityEngine.SceneManagement;
 public class ScoreManager : MonoBehaviour {
 
 	public static int galScore;
-	public static int guyScore; 
+	public static int guyScore;
+	public int maxTime;
+	private int btsTimer;
+	public int framesPerUnit;
+	public int displayedTimer;
 	public static ScoreManager scoreCard; 
 	public KeyCode restart;
-	public int pointsToWin; 
 	public bool canReset;
 
 	// Use this for initialization
 	void Start () {
+
+		displayedTimer = maxTime;
 
 		if (scoreCard == null){ 
 			scoreCard = this;  
@@ -29,29 +34,17 @@ public class ScoreManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (galScore >= pointsToWin) 
-		{
-			SceneManager.LoadScene ("Player Gal Wins");
-			canReset = true;
-			galScore = 0;
-			guyScore = 0;
-			StageBuilder.timer = 0;
-		}
-
-		if (guyScore >= pointsToWin) 
-		{
-			SceneManager.LoadScene ("Player Guy Wins");
-			canReset = true;
-			galScore = 0;
-			guyScore = 0;
-			StageBuilder.timer = 0;
-		}
+		handleTimer ();
 
 		if (canReset == true) 
 		{
 			if (Input.GetKeyDown (restart)) 
 			{
-				SceneManager.LoadScene ("Midterm Game");
+				guyScore = 0;
+				galScore = 0;
+				canReset = false;
+				displayedTimer = maxTime;
+				SceneManager.LoadScene (2);
 			}
 		}
 	}
@@ -79,6 +72,30 @@ public class ScoreManager : MonoBehaviour {
 		if (sentValue == 2) 
 		{
 			guyScore--;
+		}
+	}
+
+	void handleTimer ()
+	{
+		if (canReset == false) 
+		{
+			btsTimer++;
+			if (btsTimer >= framesPerUnit) {
+				displayedTimer--;
+				btsTimer = 0;
+			}
+		}
+
+		if (displayedTimer < 0 && canReset == false) 
+		{
+			canReset = true;
+			if (galScore > guyScore) {
+				SceneManager.LoadScene ("Player Gal Wins");
+			}
+				
+			if (guyScore > galScore) {
+				SceneManager.LoadScene ("Player Guy Wins");
+			}
 		}
 	}
 }

@@ -6,17 +6,20 @@ using UnityEngine.UI;
 public class ScoreDisplay : MonoBehaviour {
 	Text t; 
 	public int playerNum;
+	GameObject scoreManager;
+	ScoreManager sm;
 
 	// Use this for initialization
 	void Start () {
 
 		t = GetComponent<Text> ();
+		scoreManager = GameObject.Find ("Score Manager");
+		sm = scoreManager.GetComponent<ScoreManager> ();
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		float timeLeft = StageBuilder.timerLimit - StageBuilder.timer;  
 
 		if (playerNum == 1) 
 		{
@@ -30,7 +33,7 @@ public class ScoreDisplay : MonoBehaviour {
 
 		if (playerNum == 3) 
 		{
-			t.text = timeLeft.ToString (); 
+			t.text = sm.displayedTimer.ToString (); 
 		}
 		
 	}
