@@ -25,6 +25,7 @@ public class RPSSystem : MonoBehaviour {
 	public Stack <string> currentHand = new Stack <string> ();
 	public int maxStackSize;
 	public int currentStackSize;
+	StackUI sui;
 
 	GameObject scoreManager;
 	ScoreManager sm;
@@ -41,6 +42,7 @@ public class RPSSystem : MonoBehaviour {
 		handNumber = Random.Range (1, 3);
 		scoreManager = GameObject.Find("Score Manager");
 		sm = scoreManager.GetComponent<ScoreManager> ();
+		sui = GetComponent<StackUI> ();
 
 		
 	}
@@ -135,7 +137,8 @@ public class RPSSystem : MonoBehaviour {
 					handNumber = 3;
 					currentStackSize--;
 				}
-				canShift = false; 
+				canShift = false;
+				sui.unloadTheDeck ();
 			}
 		}
 

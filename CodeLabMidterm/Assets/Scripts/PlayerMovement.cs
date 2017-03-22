@@ -6,7 +6,6 @@ public class PlayerMovement : MonoBehaviour {
 	 
 	public float xVelocity;
 	public float yVelocity;
-
 	public int playerNum; 
 	public float moveSpeed;
 	public float airSpeedModifier;
@@ -30,6 +29,7 @@ public class PlayerMovement : MonoBehaviour {
 	GameObject tokenSpawner;
 	SpriteRenderer sr; 
 	Rigidbody2D rb; 
+	StackUI sui;
 
 
 
@@ -42,6 +42,7 @@ public class PlayerMovement : MonoBehaviour {
 		grounded = true; 
 		tokenSpawner = GameObject.Find ("TokenSpawner"); 
 		ts = tokenSpawner.GetComponent<TokenSpawner> (); 
+		sui = GetComponent<StackUI> ();
 		
 	}
 	
@@ -150,6 +151,7 @@ public class PlayerMovement : MonoBehaviour {
 		if (touched.gameObject.tag == "Paper Token")   
 		{
 			rps.addToStack ("Paper");
+			sui.stackTheDeck ();
 			ts.paperGone = true;
 			Destroy (touched.gameObject); 
 		}
@@ -157,6 +159,7 @@ public class PlayerMovement : MonoBehaviour {
 		if (touched.gameObject.tag == "Rock Token") 
 		{
 			rps.addToStack ("Rock");
+			sui.stackTheDeck ();
 			ts.rockGone = true;
 			Destroy (touched.gameObject); 
 		}
@@ -164,6 +167,7 @@ public class PlayerMovement : MonoBehaviour {
 		if (touched.gameObject.tag == "Scissors Token") 
 		{
 			rps.addToStack ("Scissors");
+			sui.stackTheDeck ();
 			ts.scissorsGone = true;
 			Destroy (touched.gameObject); 
 		}
