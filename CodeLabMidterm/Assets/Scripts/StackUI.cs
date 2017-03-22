@@ -8,7 +8,7 @@ public class StackUI : MonoBehaviour {
 	public GameObject firstSlot;
 	public GameObject secondSlot;
 	public GameObject thirdSlot;
-	public Sprite nadaUI;
+	public Sprite nadaUI; 
 	public Sprite rockUI;
 	public Sprite paperUI;
 	public Sprite scissorsUI;
@@ -29,14 +29,13 @@ public class StackUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+			
 		
 	}
 
-	public void stackTheDeck()
+	void firstSlotCheck()
 	{
 		string topCard = rps.currentHand.Peek ();
-		secondImage.sprite = firstImage.sprite;
-		thirdImage.sprite = secondImage.sprite;
 		if (topCard == "Rock") 
 		{
 			firstImage.sprite = rockUI; 
@@ -50,6 +49,20 @@ public class StackUI : MonoBehaviour {
 		{
 			firstImage.sprite = scissorsUI; 
 		}
+			
+			
+	}
+
+	void secondSlotCheck ()
+	{
+		secondImage.sprite = firstImage.sprite;
+		Invoke ("firstSlotCheck", 1);
+	}
+
+	public void thirdSlotCheck()
+	{
+		thirdImage.sprite = secondImage.sprite;
+		Invoke ("secondSlotCheck", 1);
 	}
 
 	public void unloadTheDeck()

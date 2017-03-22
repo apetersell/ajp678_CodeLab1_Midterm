@@ -151,7 +151,7 @@ public class PlayerMovement : MonoBehaviour {
 		if (touched.gameObject.tag == "Paper Token")   
 		{
 			rps.addToStack ("Paper");
-			sui.stackTheDeck ();
+			sui.thirdSlotCheck ();
 			ts.paperGone = true;
 			Destroy (touched.gameObject); 
 		}
@@ -159,7 +159,7 @@ public class PlayerMovement : MonoBehaviour {
 		if (touched.gameObject.tag == "Rock Token") 
 		{
 			rps.addToStack ("Rock");
-			sui.stackTheDeck ();
+			sui.thirdSlotCheck ();
 			ts.rockGone = true;
 			Destroy (touched.gameObject); 
 		}
@@ -167,7 +167,7 @@ public class PlayerMovement : MonoBehaviour {
 		if (touched.gameObject.tag == "Scissors Token") 
 		{
 			rps.addToStack ("Scissors");
-			sui.stackTheDeck ();
+			sui.thirdSlotCheck ();
 			ts.scissorsGone = true;
 			Destroy (touched.gameObject); 
 		}
